@@ -1,22 +1,18 @@
-# Project3 - Mapping Food Deserts
-### Group Project to Map Food Deserts in Georgia 
+# Project 4 - Loan Eligibility Predictor
+### Group Project To Use Machine Learning for Predicting The Approval Or Denial of a Loan Application
 
-## Project Team (The GAP Team)
-1. Ellis Purwanto - Data Visualization and Graphs
-2. Marc Avoaka - Database Design
-3. Shailesh Godkhindi - Data Analysis, Web Programming and Geo Mapping
+## Project Team (The Underwriters)
+1. [Rajeshwari Natchiappan](https://github.com/RajiNatch)
+2. [Corey Chickowski](https://github.com/cchickowski)
+3. [Nazih Bouanani](https://github.com/NazihZaz)
+4. [Shailesh Godkhindi](https://github.com/sgodkhindi)
 
 ## Key Deliverables
-### Jupyter Notebooks & PowerPoint Presentation
-- [County Data_Analysis ](Food_Deserts_Data_County.ipynb)
-- [Data Visualization & Graphs](ellisNotebooks/Plotly_Graphs.ipynb)
-- [PowerPoint Presentation](ellisCharts/Food_Deserts.pptx)
+### Jupyter Notebook + Machine Learning Model
+- [Credit Evaluator Machine Learning Notebook](Credit_Risk_Evaluator.ipynb)
+- [Credit Evaluator Machine Learning](Credit_Risk_Evaluator.zip)
+- [Scalar File](scalar.sav)
 
-
-### Database Components
-- [Database_Diagram](SQL/Food_Deserts.png)
-- [Database Schema](SQL/Schema.SQL)
-- [Database Queries](SQL/queries.sql)
 
 ### Web Application + Leaflet
 - [Web Application](Webpage/app.py)
