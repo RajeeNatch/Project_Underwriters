@@ -15,10 +15,10 @@
 
 
 ### Web Application + Leaflet
-- [Web Application](Webpage/app.py)
+- [Web Application](webpage/app.py)
 
-## Food Deserts
-A Food Desert is an area that has limited access to affordable and nutritious food. Food deserts tend to be inhabited by low-income residents with reduced mobility; this makes them a less attractive market for large supermarket chains. Food deserts lack suppliers of fresh foods, such as meats, fruits, and vegetables. Instead, the available foods are often processed and high in sugar and fats, which are known contributors to the proliferation of obesity in the U.S.
+## Objective
+Create and train a machine learning model to evaluate a loan application based on various parameters and make a predication for approval or denial.
 
 ## Development Process
 ### Beginning the data-gathering process
