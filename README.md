@@ -11,7 +11,7 @@
 ### Jupyter Notebook + Machine Learning Model
 - [Credit Evaluator Machine Learning Notebook](Credit_Risk_Evaluator.ipynb)
 - [Credit Evaluator Machine Learning Model](Credit_Risk_Evaluator_Model.zip)
-- [Scalar File](scalar.sav)
+- [Scalar File](scaler.sav)
 
 
 ### Web Application + Leaflet
