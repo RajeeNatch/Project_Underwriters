@@ -85,5 +85,5 @@ In order to use our Machine Learning model, we created a **Flask-based** Web App
 4. We were able to **Deploy** the Web Application using `Ngrok`.
 
 ## Conclusion
-In this project we were able to explore the *practical side* of **Machine Learning** which allowed us not only *develop and train* a Machine Learning Model, but also use the resultant model within a Web-based Application to solve a real-life problem.
+In this project we were able to explore the *practical side* of **Machine Learning** which allowed us not only to *develop and train* a Machine Learning Model, but also use the resultant model within a Web-based Application to solve a real-life problem.
 
