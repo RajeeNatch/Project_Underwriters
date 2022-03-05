@@ -46,7 +46,7 @@ https://www.kaggle.com/c/home-credit-default-risk/data
 2. To do so, we used the NearMiss module which is part of the `imblearn` library.
 3. The following code snippet describes it along with the net result:
 
-![Under Sampling](Images/undersampling.PNG)
+![Under Sampling](Images/under_sampling.PNG)
 
 ### Working with Unscaled Data
 1. Once the data was cleansed and balanced, we ran the engine on unscaled data.
