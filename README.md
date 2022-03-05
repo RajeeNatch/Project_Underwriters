@@ -1,5 +1,6 @@
 # Project 4 - Loan Eligibility Predictor
 ### Group Project To Use Machine Learning for Predicting The Approval Or Denial of a Loan Application
+This repository has been created and used for the development of a Loan Eligibility Application as part of the final team project of the GATECH Data Science and Analytics Bootcamp.
 
 ## Project Team (The Underwriters)
 1. [Rajeshwari Natchiappan](https://github.com/RajiNatch)
@@ -8,105 +9,81 @@
 4. [Shailesh Godkhindi](https://github.com/sgodkhindi)
 
 ## Key Deliverables
+### Project Presentation
+[Slide_Deck](Project-4-Presentation.pptx)
+
 ### Jupyter Notebook + Machine Learning Model
 - [Credit Evaluator Machine Learning Notebook](Credit_Risk_Evaluator.ipynb)
 - [Credit Evaluator Machine Learning Model](Credit_Risk_Evaluator_Model.zip)
 - [Scalar File](scaler.sav)
 
-
-### Web Application + Leaflet
+### Web Application + Flask
 - [Web Application](webpage/app.py)
 
+### Deployed Application
+- [Live Web Application](http://3c63-2600-1700-42d2-a840-f0d3-73ef-cad8-dac8.ngrok.io/)
+
 ## Objective
-Create and train a machine learning model to evaluate a loan application based on various parameters and make a predication for approval or denial.
+The objective was to create and train a **Machine Learning Model** to evaluate a loan application based on various parameters and make a predication for approval or denial. Once the machine learning model was created and trained, our objective was to use it in a **Flask-based Web Application** to accept loan applications and predict whether they can be `approved` or `denied`.  
 
-## Development Process
+## Machine Learning Model Development Process
+
 ### Beginning the data-gathering process
-We found that the Percentage of Free or Reduced Lunches (Percent_FRL) at school is a strong indicator of poverty in an area: https://nces.ed.gov/blogs/nces/post/free-or-reduced-price-lunch-a-proxy-for-poverty
+In order to build and train our Machine Learning Model, we found this excellent dataset on Kaggle:
+https://www.kaggle.com/c/home-credit-default-risk/data
 
-Using this metric and the Per Capita Income data from https://fred.stlouisfed.org/release/tables?eid=266512&rid=175, the team identified 15 counties in GA.
-
-These 15 counties are as follows:
-1. Baldwin County
-2. Clayton County
-3. Cobb County
-4. Coffee County
-5. Colquitt County
-6. DeKalb County
-7. Echols County
-8. Forsyth County
-9. Fulton County
-10. Gwinnett County
-11. Johnson County
-12. Lowndes County
-13. Meriwether County
-14. Montgomery County
-15. Washington County
-16. Wilkes County
+* This dataset had a large number of records (150000+) based on **actual loan applications** across multiple columns. 
+* It also came with it's detailed [Data_Dictionary](Data_Dictionary.csv)
 
 ### Data Analysis Preparation
-Once these15 counties were identified the team took the following steps to get all the source data together:
-1. List all the 15 counties along with the - Per Capita Income and Percent_FRL
-2. Locate the Latitude and Longitude of the County Courthouse for each county. Usually the Courthouse is the centermost point in the county.
-3. Create an input file with all this information.
+1. The first thing was to load the [Training Dataset](Resources/application_train.csv) into a Pandas Dataframe
+2. This is a huge file with **150000+ rows** and **122 columns**
+3. Once loaded, we dropped all columns that had all `NaN` values using the `dropna(axis=1)` method. This brought down the number of columns to 55.
+4. We further removed the columns that had very few non-null values to select 34 columns.
 
-### Getting GeoLocation Info using API
-The next step in the process was to use API calls to obtain GeoLocation for Grocery Stores, Dollar Stores and Fast Food Stores
-1. We decided use Foursquare Places API to get this info - https://developer.foursquare.com/reference/place-search
-2. The locations that were pulled had to be within 6 miles of the County Latitude and Longitude.
-3. For Grocery Stores chosen had to be part of a chain as they have the infrastructure and the inventory to service a large population.
+### Undersampling The Data
+1. To ensure that our Training data is balanced and not Oversampled, we undersampled it
+2. To do so, we used the NearMiss module which is part of the `imblearn` library.
+3. The following code snippet describes it along with the net result:
 
-### Data Summarization for Analysis
-The next step was to get all the data summarized by county. This was done using Panda and Python Code. 
+![Under Sampling](Images/undersampling.png)
 
-This data was stored in the PostgeSQL database for analysis as well as JSON files.
+### Working with Unscaled Data
+1. Once the data was cleansed and balanced, we ran the engine on unscaled data.
+2. We chose the **RandomForestClassifier** method due to nature of our requirement.
+3. Our model `Testing Score` was around `.7538`.
 
-As can be seen from the data presented below the presence of Grocery Stores is adequate only in certain counties with higher income
-![Final_Data Frame](Images/Final_County_DataFrame.PNG)
+![Unscaled Score](Images/unscaled_score.png)
 
-### Data Visualization and Graphs
-Finally the data from the data frames was saved in files, imported into a separate Jupyter Notebook and using Plotly, following graphs were created:
-#### Population and Per-capita Income
-![Population Vs Income](Images/1PopVsInc.png)
+### Scaling and Feature Selection
+1. The next step in our process was to fine tune our Model and improve our **Testing Score**
+2. To do that we first **Scaled** the data. 
+3. Following the scaling we used the **Feature Selection** method to further reduce the Features
+4. Feature Selection resulted in the following graph showing the key features that would improve our model
 
-#### Store Counts by County
-![Store Counts by County](Images/2StoreCounts.png)
+![Feature Selection](Images/feature_selection.png)
 
-#### Percent FRL and Income Correlation
-![Percent FRL and Income](Images/3FRLvsInc.png)
+5. The following columns were selected by the model for classification:
 
-#### Percent FRL and Grocery Store Distribution
-![Percent FRL Vs Grocery Store](Images/4FRLvsGrocery.png)
+![Selected_Columns](Images/selected_columns.png)
 
-### Heat Maps
-The county data was then fed to the Google Maps and Heat Maps showing the distribution of Grocery Stores, Dollar Stores and Fast Food Locations was done.
-#### Grocery Store Heat Map
-![Grocery Store Heat Map](Images/Grocery_Store_Heat_Map.png)
+#### Developing Final Score and Model 
+1. Once the Feature Selection was complete we reran our model using the **RandomForestClassifier** and were able to improve the score to **over 77%**.
 
-#### Dollar Store Heat Map
-![Dollar Store Heat Map](Images/Dollar_Store_Heat_Map.png)
+![Final_Score](Images/final_score.png)
 
-#### Fast Food Locations Heat Map
-![Fast Food Heat Map](Images/Fast_Food_Heat_Map.png)
+2. Once we reviewed the score, we saved our model to `pickle` file which we could then invoke within our **Web Application**.
 
-### Web Development and Geo Mapping Using Leaflet
-### Web Development
-Using Flask, Javascript and HTML the location data for individual stores and fast food locations was displayed on the Web via an interactive map.
-[Web Application](Webpage/app.py)
+## Web Application
+In order to use our Machine Learning model, we created a **Flask-based** Web Application, which would: 
+1. Allow the user enter a Loan Application on a web page.
+2. Invoke the Machine Learning Model within the application.
+3. Predict, based on the data provided, whether the Loan Application will be **Approved** or **Denied**.
 
-### Location and Geo Mapping using Leaflet
-The final step was to display these location using Leaflet and Javascript and the following layered maps were created
-#### Georgia Grocery Store Location Map
-![Georgia Grocery Store Location Map](Images/Georgia_Grocery_Store_Map.PNG)
+![Web Application](Images/app_image.png)
 
-#### Georgia Dollar Store Location Map
-![Georgia Dollar Store Location Map](Images/Georgia_Dollar_Store_Map.PNG)
-
-#### Georgia Fast Food Restaurants Location Map
-![Georgia Fast Food Restaurants Location Map](Images/Georgia_FastFood_Map.PNG)
+4. We were able to **Deploy** the Web Application using `Ngrok`.
 
 ## Conclusion
-After analyzing the data and visualizing it the team has arrived at the following conclusion:
-Areas with higher levels of poverty are more likely to become Food Deserts. Additionally, poorer counties not only have fewer Grocery stores, but they also have larger numbers of Dollar stores and Fast-Food places proportionate to their population.
-
+In this project we were able to explore the *practical side* of **Machine Learning** which allowed us not only *develop and train* a Machine Learning Model, but also use the resultant model within a Web-based Application to solve a real-life problem.
 
