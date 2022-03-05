@@ -35,7 +35,7 @@ https://www.kaggle.com/c/home-credit-default-risk/data
 * This dataset had a large number of records (150000+) based on **actual loan applications** across multiple columns. 
 * It also came with it's detailed [Data_Dictionary](Data_Dictionary.csv)
 
-### Data Analysis Preparation
+### Data Analysis & Preparation
 1. The first thing was to load the [Training Dataset](Resources/application_train.csv) into a Pandas Dataframe
 2. This is a huge file with **150000+ rows** and **122 columns**
 3. Once loaded, we dropped all columns that had all `NaN` values using the `dropna(axis=1)` method. This brought down the number of columns to 55.
